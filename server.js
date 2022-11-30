@@ -22,7 +22,7 @@ mongoose
         useCreateIndex: true,
         useFindAndModify: false
     })
-    .then(conn => {
+    .then(() => {
         console.log('Connected to mongodb atlas');
     })
     .catch(err => {

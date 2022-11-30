@@ -6,17 +6,22 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon server.js",
-        "start:pro": "NODE_ENV=production nodemon server.js"
+        "start:pro": "NODE_ENV=production nodemon server.js",
+        "compile:solidity": "solcjs --bin --abi --include-path node_module/ --base-path . -o . Certificate.sol"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "cookie-parser": "^1.4.6",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
+        "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.13.15",
         "morgan": "^1.10.0",
-        "validator": "^13.7.0"
+        "validator": "^13.7.0",
+        "ethers": "^5.7.2",
+        "solc": "0.8.7-fixed"
     },
     "devDependencies": {
         "eslint": "^5.16.0",

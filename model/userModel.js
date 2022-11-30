@@ -4,7 +4,6 @@
 
 const mongoose = require('mongoose');
 const validator = require('validator');
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const schema = mongoose.Schema(
@@ -66,5 +65,8 @@ schema.pre('save', async function(next) {
     next();
 });
 
+schema.methods.checkPassword = async function(hashed, nonHashed) {
+    return await bcrypt.compare(nonHashed, hashed);
+};
 const model = mongoose.model('users', schema);
 module.exports = model;
