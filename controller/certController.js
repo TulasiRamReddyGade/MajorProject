@@ -37,18 +37,20 @@ exports.createCertificate = catchAsync(async (req, res, next) => {
         company: req.user._id
     });
     const contract = await contractFactory.attach(process.env.CONTRACT_ADDRESS);
-    await contract.generateCertificate(
-        newCert._id,
-        student._id,
-        req.user._id,
-        req.body.name
-    );
     const cert = await certModel
         .findById(newCert._id, '+name +student -company -__v')
         .populate({
             path: 'student',
             select: '+name +email +mobile -_id -id -__v -role'
         });
+    console.log(student._id);
+    console.log(cert._id);
+    await contract.generateCertificate(
+        `${cert._id}`,
+        `${student._id}`,
+        `${req.user._id}`,
+        `${req.body.name}`
+    );
     return res.status(201).json({
         status: 'success',
         message: 'successfully created certificate',
@@ -86,6 +88,7 @@ exports.deleteCertificate = catchAsync(async (req, res, next) => {
 
 exports.verifyCertificate = catchAsync(async (req, res, next) => {
     const contract = await contractFactory.attach(process.env.CONTRACT_ADDRESS);
-    const data = await contract.getData(req.body.id);
+    console.log(req.body.id);
+    const data = await contract.getData(`${req.body.id}`);
     res.status(200).json({ data });
 });
