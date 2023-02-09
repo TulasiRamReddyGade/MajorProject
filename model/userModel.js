@@ -14,7 +14,7 @@ const schema = mongoose.Schema(
         },
         role: {
             type: 'string',
-            enum: ['student', 'institution', 'admin'],
+            enum: ['Student', 'Institution', 'Admin'],
             default: 'student'
         },
         email: {

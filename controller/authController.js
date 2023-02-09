@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../model/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const { deleteOne } = require('../model/userModel');
 
 const cookieOptions = {
     expires: new Date(
@@ -55,6 +54,7 @@ exports.signup = catchAsync(async (req, res, next) => {
             new AppError('This Operation is not allowed to perform', 400)
         );
     }
+    // console.log(req.body);
     const newUser = await userModel.create({
         name: req.body.name,
         email: req.body.email,
